@@ -38,7 +38,7 @@ def setup_logger():
 
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/game - Yeni oyun başladmaq\n' +
+                              '/ultra - Yeni oyun başladmaq\n' +
                               '/master - Aparıcı olmaq\n' +
                               '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
 
@@ -66,20 +66,20 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="➕ Qurupa Əlavə Et ➕", url="https://t.me/crolokgamebot?startgroup=a") 
-        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/croloksup") 
-        oyun = InlineKeyboardButton(text="📲 Yeniliklər Kanlı", url="https://t.me/crolokofficial") 
-        admin = InlineKeyboardButton(text="Crolok MMC", url="https://t.me/CrolokMMC") 
+        addme = InlineKeyboardButton(text="➕ Qurupa Əlavə Et ➕", url="https://t.me/UltraXgamebot?startgroup=a") 
+        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/specysup") 
+        oyun = InlineKeyboardButton(text="📲 Yeniliklər Kanlı", url="https://t.me/SpecyNews") 
+        admin = InlineKeyboardButton(text="Developer", url="https://t.me/KamranAhmedov") 
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
-        update.message.reply_text('Salam!👋 Mən sizin qurupunuzda insan adları tapmağ üçün yaradılmış Oyun botuyam. Məni qurupa əlavə edərək oynaya bilərsiz.', reply_to_message_id=True, reply_markup=reply_markup)
+        update.message.reply_text('Salam!👋 Mən sizin qurupunuzda heyvan adları tapmağ üçün yaradılmış Oyun botuyam. Məni qurupa əlavə edərək oynaya bilərsiz.', reply_to_message_id=True, reply_markup=reply_markup)
     else:
         chat_id = update.message.chat.id
         user_id = update.message.from_user.id
         username = update.message.from_user.full_name
 
-        logger.info('Got command /game,'
+        logger.info('Got command /ultra,'
                     'chat_id={},'
                     'user_id'.format(chat_id,
                                      user_id))
@@ -87,7 +87,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('Ad Oyunu Başladı ⚡'.format(username), reply_to_message_id=True) 
+        update.message.reply_text('UltraX Oyunu Başladı ⚡'.format(username), reply_to_message_id=True) 
 
         set_master(update, context)
 
@@ -104,13 +104,13 @@ def set_master(update, context):
 
     game.set_master(update.message.from_user.id)
 
-    show_word_btn = InlineKeyboardButton("✅ Ada bax", callback_data='show_word') 
-    change_word_btn = InlineKeyboardButton("🔄 Adı dəyiş", callback_data='change_word') 
+    show_word_btn = InlineKeyboardButton("✅ Bax", callback_data='show_word') 
+    change_word_btn = InlineKeyboardButton("🔄 Dəyiş", callback_data='change_word') 
 
     keyboard = [[show_word_btn], [change_word_btn]]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
-    update.message.reply_text('{} adı başa salır'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
+    update.message.reply_text('{} başa salır'.format(username,user_id), reply_to_message_id=True, reply_markup=reply_markup, parse_mode=ParseMode.MARKDOWN)
 
 
 def command_master(update: Update, context):
@@ -205,7 +205,7 @@ def is_word_answered(update, context):
     word = game.get_current_word()
 
     if game.is_word_answered(user_id, text):
-        update.message.reply_text('*{}* adını {} tapdı 🔥'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
+        update.message.reply_text('*{}* heyvanını {} tapdı 🔥'.format(word, username,user_id), reply_to_message_id=True, parse_mode=ParseMode.MARKDOWN)
 
         game.update_rating(user_id, username)
 
@@ -233,7 +233,7 @@ def main():
 
     dp = updater.dispatcher
 
-    dp.add_handler(CommandHandler("game", command_start))
+    dp.add_handler(CommandHandler("ultra", command_start))
     dp.add_handler(CommandHandler("master", command_master))
     dp.add_handler(CommandHandler("show_word", command_show_word))
     dp.add_handler(CommandHandler("change_word", command_change_word))
