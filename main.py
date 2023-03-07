@@ -67,7 +67,7 @@ def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
         addme = InlineKeyboardButton(text="➕ Qurupa Əlavə Et ➕", url="https://t.me/N1gamebot?startgroup=a") 
-        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/sohbetno1") 
+        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/sohbet_no1") 
         oyun = InlineKeyboardButton(text="📲 Yeniliklər Kanlı", url="https://t.me/RiyaddBlogg") 
         admin = InlineKeyboardButton(text="Developer", url="https://t.me/RiyadAndMe") 
 
