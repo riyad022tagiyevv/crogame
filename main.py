@@ -38,8 +38,8 @@ def setup_logger():
 
 def help(update, context):
     update.message.reply_text('Mövcud əmrlər:\n' +
-                              '/ultra - Yeni oyun başladmaq\n' +
-                              '/master - Aparıcı olmaq\n' +
+                              '/game - Yeni oyun başladmaq\n' +
+                              '/aparma - Aparıcı olmaq\n' +
                               '/rating - Qrup üzrə reytinq', reply_to_message_id=True)
 
 
@@ -66,10 +66,10 @@ def button(update, context):
 def command_start(update, context: CallbackContext):
     if update.effective_chat.type == "private":
         
-        addme = InlineKeyboardButton(text="➕ Qurupa Əlavə Et ➕", url="https://t.me/UltraXgamebot?startgroup=a") 
-        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/specysup") 
-        oyun = InlineKeyboardButton(text="📲 Yeniliklər Kanlı", url="https://t.me/SpecyNews") 
-        admin = InlineKeyboardButton(text="Developer", url="https://t.me/KamranAhmedov") 
+        addme = InlineKeyboardButton(text="➕ Qurupa Əlavə Et ➕", url="https://t.me/N1gamebot?startgroup=a") 
+        sohbet = InlineKeyboardButton(text="⛑ Dəstək Qurupumuz", url="https://t.me/sohbetno1") 
+        oyun = InlineKeyboardButton(text="📲 Yeniliklər Kanlı", url="https://t.me/RiyaddBlogg") 
+        admin = InlineKeyboardButton(text="Developer", url="https://t.me/RiyadAndMe") 
 
         keyboard = [[addme],[sohbet],[oyun],[admin]]
         reply_markup = InlineKeyboardMarkup(keyboard)
@@ -79,7 +79,7 @@ def command_start(update, context: CallbackContext):
         user_id = update.message.from_user.id
         username = update.message.from_user.full_name
 
-        logger.info('Got command /ultra,'
+        logger.info('Got command /game,'
                     'chat_id={},'
                     'user_id'.format(chat_id,
                                      user_id))
@@ -87,7 +87,7 @@ def command_start(update, context: CallbackContext):
         game = get_or_create_game(chat_id)
         game.start()
 
-        update.message.reply_text('UltraX Oyunu Başladı ⚡'.format(username), reply_to_message_id=True) 
+        update.message.reply_text('Heyvan Tapma Oyunu Başladı ⚡'.format(username), reply_to_message_id=True) 
 
         set_master(update, context)
 
@@ -127,7 +127,7 @@ def command_master(update: Update, context):
                                   reply_to_message_id=True)
         return
 
-    logger.info('Got command /master,'
+    logger.info('Got command /aparma,'
                 'chat_id={},'
                 'user="{}"({}),'
                 'timedelta={}'.format(chat_id,
